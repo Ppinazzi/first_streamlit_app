@@ -17,3 +17,5 @@ df_fruit_list = pd.read_csv(filepath)
 streamlit.multiselect("Pick your fruits:", list(df_fruit_list.index))
 # Show the fruit list below the pick up list:
 streamlit.dataframe(df_fruit_list)
+
+streamlit.dataframe(df_fruit_list.iloc[:, "Fruit"])
