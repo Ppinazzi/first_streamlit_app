@@ -12,7 +12,7 @@ streamlit.text("🥑🍞 Avodacdo Toast")
 
 streamlit.header("'🍌🥭 Build Your Own Fruit Smoothie 🥝🍇")
 df_fruit_list = pd.read_csv(filepath) 
-df_fuit_list = df_fruit_list.set_index('Fruit')
+df_fruit_list = df_fruit_list.set_index('Fruit')
 # Let's put a pick list so they can pick the fruit they want to include 
 streamlit.multiselect("Pick your fruits:", df_fruit_list.index])
 # Show the fruit list below the pick up list:
