@@ -17,7 +17,7 @@ df_fruit_list = df_fruit_list.set_index('Fruit')
 streamlit.multiselect(
   label="Pick your fruits:",
   df_fruit_list.index,
-  ['Avocqdo']
+  ['Avocado']
 )
 # Show the fruit list below the pick up list:
 streamlit.dataframe(df_fruit_list)
