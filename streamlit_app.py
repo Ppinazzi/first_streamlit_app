@@ -1,4 +1,4 @@
-ries"import streamlit
+import streamlit
 import pandas as pd
 
 filepath = "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
