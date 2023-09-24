@@ -1,4 +1,4 @@
-import streamlit
+ries"import streamlit
 import pandas as pd
 
 filepath = "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
@@ -17,7 +17,7 @@ df_fruit_list = df_fruit_list.set_index('Fruit')
 streamlit.multiselect(
   label="Pick your fruits:",
   df_fruit_list.index,
-  ["Chicken", "Apple"]
+  ["Chicken", "Apple", "Cherries"]
 )
 # Show the fruit list below the pick up list:
 streamlit.dataframe(df_fruit_list)
