@@ -1,6 +1,6 @@
 import streamlit
 import pandas as pd
-
+import requests
 filepath = "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
 
 streamlit.header('Breakfast Favorites')
@@ -18,3 +18,7 @@ selected_fruit_list = streamlit.multiselect("Pick your fruits:", df_fruit_list.i
 # Show the fruit list below the pick up list:
 # streamlit.dataframe(df_fruit_list)
 streamlit.dataframe(df_fruit_list.loc[selected_fruit_list])
+
+streamlit.header("Suggestion of the week :) ")
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response)
