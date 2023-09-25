@@ -28,3 +28,10 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon"
 # streamlit.text(fruityvice_response.json())
 streamlit.dataframe(pd.json_normalize(fruityvice_response.json()))
 #
+streamlit.header("Pick fruit, I'll tellhow it is good!!")
+user_choice = streamlit.text_input(
+  'What fruit would you like information about?',
+  'Kiwi'
+)
+fruit_request_response = requests.get("https://fruityvice.com/api/fruit/" + user_choice)
+streamlit.dataframe(pd.json_normalize(fruit_request_response.json()))
