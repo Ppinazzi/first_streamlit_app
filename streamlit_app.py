@@ -39,7 +39,6 @@ user_choice = streamlit.text_input(
 fruit_request_response = requests.get("https://fruityvice.com/api/fruit/" + user_choice)
 streamlit.dataframe(pd.json_normalize(fruit_request_response.json()))
 
-
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
