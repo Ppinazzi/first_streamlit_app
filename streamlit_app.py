@@ -4,10 +4,16 @@ import requests
 import snowflake.connector
 from urllib.error import URLError
 
+# Config 
 filepath = "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
 
-streamlit.header('Breakfast Favorites')
+# Helper Functions 
+def get_fruit_info(user_fruit_request: str):
+  fruit_request_response = requests.get("https://fruityvice.com/api/fruit/" + user_fruit_request)
+  return pd.json_normalize(fruit_request_response.json())
 
+# Main
+streamlit.header('Breakfast Favorites')
 streamlit.text("🥣 Omega 3 & Blueberry Oatmel")
 streamlit.text("🥗 Kale, Spinach & Rocket Smoothie")
 streamlit.text("🐔 Chicken !!")
@@ -27,10 +33,11 @@ selected_fruit_list = streamlit.multiselect(
 streamlit.dataframe(df_fruit_list.loc[selected_fruit_list])
 
 streamlit.header("Suggestion of the week:")
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+fruit_info = get_fruit_info("watermelon")
+# fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 # streamlit.text(fruityvice_response.json())
-streamlit.dataframe(pd.json_normalize(fruityvice_response.json()))
-
+# streamlit.dataframe(pd.json_normalize(fruityvice_response.json()))
+streamlit.dataframe(fruit_info)
 
 # New section to display the fruityvice response 
 streamlit.header("Pick fruit, I'll tell how it is good!!")
