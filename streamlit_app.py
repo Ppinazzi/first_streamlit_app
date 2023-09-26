@@ -17,7 +17,7 @@ def get_data_from_snowflake():
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   with my_cnx.cursor() as my_cur:
     my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
-    query_response = my_cur.fetall()
+    query_response = my_cur.fetchall()
   return query_response
 
 ##############################################################################
