@@ -2,7 +2,7 @@ import streamlit
 import pandas as pd
 import requests
 import snowflake.connector
-
+from urllib.error import URLError
 
 filepath = "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
 
@@ -30,14 +30,19 @@ streamlit.header("Suggestion of the week:")
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 # streamlit.text(fruityvice_response.json())
 streamlit.dataframe(pd.json_normalize(fruityvice_response.json()))
-#
-streamlit.header("Pick fruit, I'll tellhow it is good!!")
-user_choice = streamlit.text_input(
-  'What fruit would you like information about?',
-  'Kiwi'
-)
-fruit_request_response = requests.get("https://fruityvice.com/api/fruit/" + user_choice)
-streamlit.dataframe(pd.json_normalize(fruit_request_response.json()))
+
+
+# New section to display the fruityvice response 
+streamlit.header("Pick fruit, I'll tell how it is good!!")
+try:
+  user_choice = streamlit.text_input('What fruit would you like information about?')
+  if not user_choice:
+    streamlit.error("Please select a fruit")
+  else:
+    fruit_request_response = requests.get("https://fruityvice.com/api/fruit/" + user_choice)
+    streamlit.dataframe(pd.json_normalize(fruit_request_response.json()))
+except URLError as e:
+  streamlit.error()
 
 streamlit.stop()
 # don't run anything past here while troubleshooting 
