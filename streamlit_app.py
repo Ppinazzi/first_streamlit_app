@@ -23,7 +23,7 @@ def get_data_from_snowflake():
 def put_data_into_snowflake(fruit_string: str):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   with my_cnx.cursor() as my_cur:
-    my_cur.execute(f"INSERT INTO FRUIT_LOAD_LIST VALUES ({fruit_string})")
+    my_cur.execute(f"INSERT INTO FRUIT_LOAD_LIST VALUES ('{fruit_string}')")
   return f"Thank you for adding {fruit_string}"
 
 
