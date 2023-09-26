@@ -52,5 +52,5 @@ add_my_fruit = streamlit.text_input(
   'What fruit would you like to add?',
   'Kiwi',
 )
-streamlit.write(f"Thanks for adding your fruit + {add_my_fruit}")
+streamlit.write(f"Thanks for adding your fruit: {add_my_fruit}")
 #
