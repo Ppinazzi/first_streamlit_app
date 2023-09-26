@@ -20,6 +20,13 @@ def get_data_from_snowflake():
     query_response = my_cur.fetchall()
   return query_response
 
+def put_data_into_snowflake(fruit_string: str):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("INSERT INTO FRUIT_LOAD_LIST VALUES ('fruit_string')")
+  return f"Thank you for adding {fruit_string}"
+
+
 ##############################################################################
 
 # Main
@@ -68,21 +75,13 @@ if streamlit.button('Get Fruit Load List'):
   streamlit.text("The fruit load list contains:")
   streamlit.dataframe(query_response)
 
-streamlit.stop()
-# don't run anything past here while troubleshooting 
-
-# my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-# my_cur = my_cnx.cursor()
-# my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
-# # my_data_row = my_cur.fetchone()
-# my_data_row = my_cur.fetchall()
-streamlit.text("The fruit load list contains:")
-streamlit.dataframe(my_data_row)
-
 # Let the user specify a fruit he wants to add to the database
-add_my_fruit = streamlit.text_input(
+fruit_to_add = streamlit.text_input(
   'What fruit would you like to add?',
-  'Kiwi',
+  'jackfruit',
 )
-streamlit.write(f"Thanks for adding your fruit: {add_my_fruit}")
-#
+if streamlit.button("Add fruit to SNFK:"):
+  put_data_into_snowflake(fruit_to_add)
+
+my_data_rows = get_data_from_snowflake()
+streamlit.dataframe(my_data_rows)
